@@ -63,10 +63,12 @@ int main() {
 
        CurrentLine = "";
    }
+    
     myFile.close();
     CurrentLine = "";
 
     //Passar ficheiro ClassesPerUc para vetor ArrClassesPerUc
+    
     vector<classesPerUcStruct> ArrClassesPerUc;
     classesPerUcStruct classPerUc;
 
@@ -80,6 +82,7 @@ int main() {
 
         CurrentLine= "";
     }
+    
     myFile.close();
     CurrentLine = "";
 
