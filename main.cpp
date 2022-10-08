@@ -30,7 +30,6 @@ struct StudentsClassesStruct{
     string ClassCode;
 };
 
-
 int main() {
     ifstream myFile;
     string CurrentLine="";   // string usada para ler os ficheiros
