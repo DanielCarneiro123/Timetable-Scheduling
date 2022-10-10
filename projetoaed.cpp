@@ -54,13 +54,16 @@ using namespace std;
     void horarioEstudante(const vector<StudentsClassesStruct>& arr1, const vector<classesStruct>& arr2, string nomeEstudante){
         string codigoTurma;
         string codigoUc;
+        int i = 0;
         for (auto x: arr1){
             if (x.StudentName.compare(nomeEstudante)==0){
                  codigoUc = x.UcCode;
                  codigoTurma = x.ClassCode;
                 cout << "O estudante " << nomeEstudante << " tem " << x.UcCode << " na turma " << x.ClassCode;
                 for (const auto& y: arr2){
-                    if (y.ClassCode.compare(codigoTurma)==0 && y.UcCode.compare(codigoUc)==0) {
+                    cout << y.ClassCode << " " << i++ << " " << codigoTurma << endl; /// para perceber em que linha são iguais e se verifica a primeira parte do if, 1260 por ex
+                    ///cout << y.UcCode << " " << i++ << " " << codigoUc << endl;  /// para perceber em que linha são iguais e se verifica a segunda parte do if, 1260 por ex
+                    if ((y.ClassCode.compare(codigoTurma)==0) && (y.UcCode.compare(codigoUc)==0)) {
                         cout << nomeEstudante << " has a " << y.Type << " class for UC " <<  codigoUc << " from " << y.StartHour << " to "
                              << y.StartHour + y.Duration << " at " << y.Weekday << endl;}
                 }}}
