@@ -14,8 +14,8 @@ struct classesStruct{
     string ClassCode;
     string UcCode;
     string Weekday;
-    int StartHour;
-    int Duration;
+    int StartHour{};
+    int Duration{};
     string Type;
 };
 
@@ -38,22 +38,39 @@ struct StudentsClassesStruct{
 };
 
 
-int func(string cadeira, string turma, vector<StudentsClassesStruct> arr){
+int ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClassesStruct>& arr){
     int acc=0;
-    for (auto x:arr){
+    for (const auto& x:arr){
         int i = x.UcCode.compare(cadeira);
-        if (i==0){
+        int j = x.ClassCode.compare(turma);
+        if (i==0 && j==0){
             acc++;
         }
     }
 
-    cout << "Todas as strings analisadas";
+    cout << "Numero de pessoas da turma " << turma << " na UC " << cadeira << ": ";
     return acc;}
+
+int horarioEstudante(const vector<StudentsClassesStruct>& arr1, const vector<classesStruct>& arr2, string nomeEstudante){
+    for (auto x: arr1){
+        string codigoTurma;
+        string codigoUc;
+        if (x.StudentName.compare(nomeEstudante)==0){
+            string codigoUc = x.UcCode;
+            string codigoTurma = x.ClassCode;
+            cout << nomeEstudante << " has " << x.UcCode << " na turma " << x.ClassCode;
+
+            for (auto y: arr2){
+                if (y.ClassCode.compare(codigoTurma)==0 && y.UcCode.compare(codigoUc)==0) {
+                    cout << nomeEstudante << " has a " << y.Type << " class for UC " <<  codigoUc << " from " << y.StartHour << " to "
+                         << y.StartHour + y.Duration << " at " << y.Weekday << endl;}
+            }}}
+}
 
 
 int main() {
     ifstream myFile;
-    string CurrentLine="";   // string usada para ler os ficheiros
+    string CurrentLine;   // string usada para ler os ficheiros
 
     //Passar ficheiro Classes para vetor ArrClasses
 
@@ -67,22 +84,22 @@ int main() {
     while(getline(myFile,CurrentLine)) {
         stringstream inputString(CurrentLine);
         getline(inputString, classe.ClassCode, ',');
-       getline(inputString, classe.UcCode, ',');
-       getline(inputString, classe.Weekday, ',');
+        getline(inputString, classe.UcCode, ',');
+        getline(inputString, classe.Weekday, ',');
 
-       getline(inputString, tempClassString, ',');
-       classe.StartHour=atoi(tempClassString.c_str());
+        getline(inputString, tempClassString, ',');
+        classe.StartHour=atoi(tempClassString.c_str());
 
-       tempClassString="";
-       getline(inputString, tempClassString, ',');
-       classe.Duration=atoi(tempClassString.c_str());
+        tempClassString="";
+        getline(inputString, tempClassString, ',');
+        classe.Duration=atoi(tempClassString.c_str());
 
-       getline(inputString,classe.Type,',');
+        getline(inputString,classe.Type,',');
 
-       ArrClasses.push_back(classe);
+        ArrClasses.push_back(classe);
 
-       CurrentLine = "";
-   }
+        CurrentLine = "";
+    }
     myFile.close();
     CurrentLine = "";
 
@@ -120,11 +137,9 @@ int main() {
         ArrStudentsClasses.push_back(studentClasses);
 
         CurrentLine= "";
-        int acc = func("L.EIC002","1LEIC05",ArrStudentsClasses);
-        cout << acc <<endl;
 
-    }}
-
-
-
-
+    }
+    int acc = ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
+    cout << acc <<endl;
+    horarioEstudante(ArrStudentsClasses,ArrClasses, "Ludovico");
+}
