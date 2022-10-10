@@ -48,24 +48,38 @@ int ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClass
         }
     }
 
-    cout << "Numero de pessoas da turma " << turma << " na UC " << cadeira << ": ";
+    cout << "Number of people in class " << turma << " for UC " << cadeira << ": ";
     return acc;}
 
-int horarioEstudante(const vector<StudentsClassesStruct>& arr1, const vector<classesStruct>& arr2, string nomeEstudante){
-    for (auto x: arr1){
-        string codigoTurma;
-        string codigoUc;
-        if (x.StudentName.compare(nomeEstudante)==0){
-            string codigoUc = x.UcCode;
-            string codigoTurma = x.ClassCode;
-            cout << nomeEstudante << " has " << x.UcCode << " na turma " << x.ClassCode;
 
-            for (auto y: arr2){
-                if (y.ClassCode.compare(codigoTurma)==0 && y.UcCode.compare(codigoUc)==0) {
-                    cout << nomeEstudante << " has a " << y.Type << " class for UC " <<  codigoUc << " from " << y.StartHour << " to "
-                         << y.StartHour + y.Duration << " at " << y.Weekday << endl;}
-            }}}
+    void OcupacaoUc(const vector<StudentsClassesStruct>& arr, string cadeira){
+    int sum = 0;
+    for (const auto& x: arr){
+        int i = x.UcCode.compare(cadeira);
+        if (i == 0){
+            sum++;
+        }
+    }
+    cout << "O numero de pessoas inscritas na unidade curricular " << cadeira << " e " << sum;
 }
+void horarioEstudante(const vector<StudentsClassesStruct>& arr1, const vector<classesStruct>& arr2, string nomeEstudante){
+    string turmaAtual = "";
+    string cadeiraAtual = "";
+    for (auto x: arr1){
+        if (x.StudentName.compare(nomeEstudante)==0){
+            turmaAtual = x.ClassCode;
+            cadeiraAtual = x.UcCode;
+            for (auto y:arr2){
+                int n1=y.ClassCode.compare(turmaAtual);
+                int n2=y.UcCode.compare(cadeiraAtual);
+                if (n1==0 && n2==0){
+                    cout << nomeEstudante << " has a " << y.Type << " class for UC " <<  y.UcCode << " from " << y.StartHour << " to " << y.StartHour + y.Duration << " on " << y.Weekday << endl;}
+                }
+            }
+
+        }
+    }
+
 
 
 int main() {
@@ -139,7 +153,7 @@ int main() {
         CurrentLine= "";
 
     }
-    int acc = ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
-    cout << acc <<endl;
+    //int acc = ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
+    //cout << acc <<endl;
     horarioEstudante(ArrStudentsClasses,ArrClasses, "Ludovico");
 }
