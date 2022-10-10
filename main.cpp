@@ -38,7 +38,7 @@ struct StudentsClassesStruct{
 };
 
 
-int ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClassesStruct>& arr){
+void ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClassesStruct>& arr){
     int acc=0;
     for (const auto& x:arr){
         int i = x.UcCode.compare(cadeira);
@@ -48,11 +48,11 @@ int ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClass
         }
     }
 
-    cout << "Number of people in class " << turma << " for UC " << cadeira << ": ";
-    return acc;}
+    cout << "Number of people in class " << turma << " for UC " << cadeira << ": " << acc;
+    }
 
 
-    void OcupacaoUc(const vector<StudentsClassesStruct>& arr, string cadeira){
+    void ocupacaoUc(const vector<StudentsClassesStruct>& arr, string cadeira){
     int sum = 0;
     for (const auto& x: arr){
         int i = x.UcCode.compare(cadeira);
@@ -60,7 +60,7 @@ int ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClass
             sum++;
         }
     }
-    cout << "O numero de pessoas inscritas na unidade curricular " << cadeira << " e " << sum;
+    cout << "The number of students in UC " << cadeira << " is " << sum;
 }
 void horarioEstudante(const vector<StudentsClassesStruct>& arr1, const vector<classesStruct>& arr2, string nomeEstudante){
     string turmaAtual = "";
@@ -153,7 +153,9 @@ int main() {
         CurrentLine= "";
 
     }
-    //int acc = ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
-    //cout << acc <<endl;
-    horarioEstudante(ArrStudentsClasses,ArrClasses, "Ludovico");
+
+    //---------------TESTING---------------------
+    //ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
+    //ocupacaoUc(ArrStudentsClasses, "L.EIC021");
+    //horarioEstudante(ArrStudentsClasses,ArrClasses, "Ludovico");
 }
