@@ -52,15 +52,14 @@ using namespace std;
         return acc;}
 
     void horarioEstudante(const vector<StudentsClassesStruct>& arr1, const vector<classesStruct>& arr2, string nomeEstudante){
+        string codigoTurma;
+        string codigoUc;
         for (auto x: arr1){
-            string codigoTurma;
-            string codigoUc;
             if (x.StudentName.compare(nomeEstudante)==0){
-                string codigoUc = x.UcCode;
-                string codigoTurma = x.ClassCode;
-                cout << nomeEstudante << " tem " << x.UcCode << " na turma " << x.ClassCode;
-
-                for (auto y: arr2){
+                 codigoUc = x.UcCode;
+                 codigoTurma = x.ClassCode;
+                cout << "O estudante " << nomeEstudante << " tem " << x.UcCode << " na turma " << x.ClassCode;
+                for (const auto& y: arr2){
                     if (y.ClassCode.compare(codigoTurma)==0 && y.UcCode.compare(codigoUc)==0) {
                         cout << nomeEstudante << " has a " << y.Type << " class for UC " <<  codigoUc << " from " << y.StartHour << " to "
                              << y.StartHour + y.Duration << " at " << y.Weekday << endl;}
@@ -142,5 +141,5 @@ using namespace std;
         int acc = ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
         cout << acc <<endl;
 
-        horarioEstudante(ArrStudentsClasses,ArrClasses, "Ludovico");
+        horarioEstudante(ArrStudentsClasses,ArrClasses, "Helena");
     }
