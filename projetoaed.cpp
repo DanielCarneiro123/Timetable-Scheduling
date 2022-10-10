@@ -58,7 +58,7 @@ using namespace std;
             if (x.StudentName.compare(nomeEstudante)==0){
                 string codigoUc = x.UcCode;
                 string codigoTurma = x.ClassCode;
-                cout << nomeEstudante << " has " << x.UcCode << " na turma " << x.ClassCode;
+                cout << nomeEstudante << " tem " << x.UcCode << " na turma " << x.ClassCode;
 
                 for (auto y: arr2){
                     if (y.ClassCode.compare(codigoTurma)==0 && y.UcCode.compare(codigoUc)==0) {
