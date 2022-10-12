@@ -51,6 +51,17 @@ void ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClas
 
     cout << "Number of people in class " << turma << " for UC " << cadeira << ": " << acc;
 }
+
+void ocupacaoUcsAno(const vector<StudentsClassesStruct>& arr, char ano){
+    vector<string> v;
+    for (const auto& x: arr){
+        if(x.ClassCode.at(0) == ano && !(find(v.begin(), v.end(), x.StudentName) != v.end())){
+            v.push_back(x.StudentName);
+        }}
+    int acc=0;
+    for (auto x: v) acc++;
+    cout << "Number of people attending UCs belonging to ano " << ano << ": " << acc;
+    }
 ///Número de estudantes numa UC x (Ocupação UC)
 
 void ocupacaoUc(const vector<StudentsClassesStruct>& arr, string cadeira){
@@ -61,7 +72,7 @@ void ocupacaoUc(const vector<StudentsClassesStruct>& arr, string cadeira){
             sum++;
         }
     }
-    cout << "The number of students in UC " << cadeira << " is " << sum;
+    cout << "Number of students in UC " << cadeira << ": " << sum;
 }
 
 ///Estudantes em determinada turma x
@@ -211,5 +222,6 @@ int main() {
     //ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
     //ocupacaoUc(ArrStudentsClasses, "L.EIC021");
     //horarioEstudante(ArrStudentsClasses,ArrClasses, "Ludovico");
-    estudantesEmUcsAno(ArrStudentsClasses, '1');
+    //estudantesEmUcsAno(ArrStudentsClasses, '1');
+    ocupacaoUcsAno(ArrStudentsClasses,'1');
 }
