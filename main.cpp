@@ -40,10 +40,7 @@ struct StudentsClassesStruct{
 };
 
 ///funcao para comparares strings
-bool mycomp(string a, string b){
-    //returns 1 if string a is alphabetically
-    //less than string b
-    //quite similar to strcmp operation
+bool strcomp(string a, string b){
     return a<b;
 }
 
