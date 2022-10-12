@@ -4,6 +4,7 @@
 #include <sstream>
 #include <vector>
 #include <ostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -36,7 +37,7 @@ struct StudentsClassesStruct{
     string UcCode;
     string ClassCode;
 };
-
+///Numero de estudantes numa turma x (Ocuupação da turma)
 
 void ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClassesStruct>& arr){
     int acc=0;
@@ -49,10 +50,10 @@ void ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClas
     }
 
     cout << "Number of people in class " << turma << " for UC " << cadeira << ": " << acc;
-    }
+}
+///Número de estudantes numa UC x (Ocupação UC)
 
-
-    void ocupacaoUc(const vector<StudentsClassesStruct>& arr, string cadeira){
+void ocupacaoUc(const vector<StudentsClassesStruct>& arr, string cadeira){
     int sum = 0;
     for (const auto& x: arr){
         int i = x.UcCode.compare(cadeira);
@@ -62,6 +63,57 @@ void ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClas
     }
     cout << "The number of students in UC " << cadeira << " is " << sum;
 }
+
+///Estudantes em determinada turma x
+
+void estudantesTurma(const vector<StudentsClassesStruct>& arr, string turma){
+    string sep = ":";
+    cout << "The students that belong to class " << turma << " are";
+    for (const auto& x: arr){
+        if (x.ClassCode.compare(turma) == 0){
+            cout << sep << " " << x.StudentName;
+            sep = ",";
+        }
+    }
+    cout << ".";
+}
+
+void estudantesEmUcsAno(const vector<StudentsClassesStruct>& arr, char ano){
+    string sep = ":";
+    vector<string> v;
+    for (const auto& x: arr){
+            if(x.ClassCode.at(0) == ano && !(find(v.begin(), v.end(), x.StudentName) != v.end())){
+                v.push_back(x.StudentName);
+            }
+
+    }
+    cout << "The students that are attending UCs belonging to year " << ano << " are";
+    for (auto x : v){
+        cout << sep << " " << x;
+        sep = ",";
+
+    }
+    cout << ".";
+
+}
+
+///Estudantes em determinada UC x
+void estudantesUC(const vector<StudentsClassesStruct>& arr, string cadeira){
+    string sep = ":";
+    cout << "The students that are attending UC " << cadeira << " are";
+    for (const auto& x: arr){
+        if (x.UcCode.compare(cadeira) == 0){
+            cout << sep << " " << x.StudentName;
+            sep = ",";
+        }
+    }
+    cout << ".";
+}
+
+
+
+///Horário de determinado estudante
+
 void horarioEstudante(const vector<StudentsClassesStruct>& arr1, const vector<classesStruct>& arr2, string nomeEstudante){
     string turmaAtual = "";
     string cadeiraAtual = "";
@@ -74,11 +126,11 @@ void horarioEstudante(const vector<StudentsClassesStruct>& arr1, const vector<cl
                 int n2=y.UcCode.compare(cadeiraAtual);
                 if (n1==0 && n2==0){
                     cout << nomeEstudante << " has a " << y.Type << " class for UC " <<  y.UcCode << " from " << y.StartHour << " to " << y.StartHour + y.Duration << " on " << y.Weekday << endl;}
-                }
             }
-
         }
+
     }
+}
 
 
 
@@ -154,8 +206,10 @@ int main() {
 
     }
 
-    //---------------TESTING---------------------
+    //estudantesUC(ArrStudentsClasses,"L.EIC002");
+    //estudantesTurma(ArrStudentsClasses, "1LEIC05");
     //ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
     //ocupacaoUc(ArrStudentsClasses, "L.EIC021");
     //horarioEstudante(ArrStudentsClasses,ArrClasses, "Ludovico");
+    estudantesEmUcsAno(ArrStudentsClasses, '1');
 }
