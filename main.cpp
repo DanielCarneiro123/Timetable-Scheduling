@@ -5,6 +5,7 @@
 #include <vector>
 #include <ostream>
 #include <algorithm>
+#include <cstring>
 
 using namespace std;
 
@@ -37,6 +38,15 @@ struct StudentsClassesStruct{
     string UcCode;
     string ClassCode;
 };
+
+///funcao para comparares strings
+bool mycomp(string a, string b){
+    //returns 1 if string a is alphabetically
+    //less than string b
+    //quite similar to strcmp operation
+    return a<b;
+}
+
 ///Numero de estudantes numa turma x (Ocuupação da turma)
 
 void ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClassesStruct>& arr){
@@ -61,7 +71,7 @@ void ocupacaoUcsAno(const vector<StudentsClassesStruct>& arr, char ano){
     int acc=0;
     for (auto x: v) acc++;
     cout << "Number of people attending UCs belonging to ano " << ano << ": " << acc;
-    }
+}
 ///Número de estudantes numa UC x (Ocupação UC)
 
 void ocupacaoUc(const vector<StudentsClassesStruct>& arr, string cadeira){
@@ -79,12 +89,17 @@ void ocupacaoUc(const vector<StudentsClassesStruct>& arr, string cadeira){
 
 void estudantesTurma(const vector<StudentsClassesStruct>& arr, string turma){
     string sep = ":";
+    vector<string> names;
     cout << "The students that belong to class " << turma << " are";
     for (const auto& x: arr){
         if (x.ClassCode.compare(turma) == 0){
-            cout << sep << " " << x.StudentName;
-            sep = ",";
+            names.push_back(x.StudentName);
         }
+    }
+    sort(names.begin(), names.end(), mycomp);
+    for (const auto& n: names){
+        cout << sep << " " << n;
+        sep = ",";
     }
     cout << ".";
 }
@@ -93,11 +108,12 @@ void estudantesEmUcsAno(const vector<StudentsClassesStruct>& arr, char ano){
     string sep = ":";
     vector<string> v;
     for (const auto& x: arr){
-            if(x.ClassCode.at(0) == ano && !(find(v.begin(), v.end(), x.StudentName) != v.end())){
-                v.push_back(x.StudentName);
-            }
+        if(x.ClassCode.at(0) == ano && !(find(v.begin(), v.end(), x.StudentName) != v.end())){
+            v.push_back(x.StudentName);
+        }
 
     }
+    sort(v.begin(), v.end(), mycomp);
     cout << "The students that are attending UCs belonging to year " << ano << " are";
     for (auto x : v){
         cout << sep << " " << x;
@@ -111,12 +127,17 @@ void estudantesEmUcsAno(const vector<StudentsClassesStruct>& arr, char ano){
 ///Estudantes em determinada UC x
 void estudantesUC(const vector<StudentsClassesStruct>& arr, string cadeira){
     string sep = ":";
+    vector<string> v;
     cout << "The students that are attending UC " << cadeira << " are";
     for (const auto& x: arr){
         if (x.UcCode.compare(cadeira) == 0){
-            cout << sep << " " << x.StudentName;
-            sep = ",";
+            v.push_back(x.StudentName);
         }
+    }
+    sort(v.begin(), v.end(), mycomp);
+    for (const auto& n: v){
+        cout << sep << " " << n;
+        sep = ",";
     }
     cout << ".";
 }
@@ -154,7 +175,7 @@ int main() {
     vector<classesStruct> ArrClasses;
     classesStruct classe;
 
-    myFile.open("C:/Users/utilizador/TrabalhoAED/classes.csv");
+    myFile.open("C:/Users/danie/CLionProjects/AED Project/classes.csv");
     getline(myFile,CurrentLine);
     string tempClassString; // string criada para poder copiar ints como classes.StartHour e classe.Duration para uma string
 
@@ -184,7 +205,7 @@ int main() {
     vector<classesPerUcStruct> ArrClassesPerUc;
     classesPerUcStruct classPerUc;
 
-    myFile.open("C:/Users/utilizador/TrabalhoAED/classes_per_uc.csv");
+    myFile.open("C:/Users/danie/CLionProjects/AED Project/classes_per_uc.csv");
     getline(myFile,CurrentLine);
     while(getline(myFile,CurrentLine)) {
         stringstream inputString(CurrentLine);
@@ -202,7 +223,7 @@ int main() {
     vector<StudentsClassesStruct> ArrStudentsClasses;
     StudentsClassesStruct studentClasses;
 
-    myFile.open("C:/Users/utilizador/TrabalhoAED/students_classes.csv");
+    myFile.open("C:/Users/danie/CLionProjects/AED Project/students_classes.csv");
     getline(myFile,CurrentLine);
 
     while(getline(myFile,CurrentLine)) {
@@ -217,11 +238,11 @@ int main() {
 
     }
 
-    //estudantesUC(ArrStudentsClasses,"L.EIC002");
+    estudantesUC(ArrStudentsClasses,"L.EIC002");
     //estudantesTurma(ArrStudentsClasses, "1LEIC05");
     //ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
     //ocupacaoUc(ArrStudentsClasses, "L.EIC021");
     //horarioEstudante(ArrStudentsClasses,ArrClasses, "Ludovico");
     //estudantesEmUcsAno(ArrStudentsClasses, '1');
-    ocupacaoUcsAno(ArrStudentsClasses,'1');
+    //ocupacaoUcsAno(ArrStudentsClasses,'1');
 }
