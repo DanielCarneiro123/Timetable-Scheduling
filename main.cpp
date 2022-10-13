@@ -93,7 +93,7 @@ void estudantesTurma(const vector<StudentsClassesStruct>& arr, string turma){
             names.push_back(x.StudentName);
         }
     }
-    sort(names.begin(), names.end(), mycomp);
+    sort(names.begin(), names.end(), strcomp);
     for (const auto& n: names){
         cout << sep << " " << n;
         sep = ",";
@@ -110,7 +110,7 @@ void estudantesEmUcsAno(const vector<StudentsClassesStruct>& arr, char ano){
         }
 
     }
-    sort(v.begin(), v.end(), mycomp);
+    sort(v.begin(), v.end(), strcomp);
     cout << "The students that are attending UCs belonging to year " << ano << " are";
     for (auto x : v){
         cout << sep << " " << x;
@@ -131,7 +131,7 @@ void estudantesUC(const vector<StudentsClassesStruct>& arr, string cadeira){
             v.push_back(x.StudentName);
         }
     }
-    sort(v.begin(), v.end(), mycomp);
+    sort(v.begin(), v.end(), strcomp);
     for (const auto& n: v){
         cout << sep << " " << n;
         sep = ",";
@@ -235,11 +235,11 @@ int main() {
 
     }
 
-    estudantesUC(ArrStudentsClasses,"L.EIC002");
+    //estudantesUC(ArrStudentsClasses,"L.EIC002");
     //estudantesTurma(ArrStudentsClasses, "1LEIC05");
     //ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
     //ocupacaoUc(ArrStudentsClasses, "L.EIC021");
-    //horarioEstudante(ArrStudentsClasses,ArrClasses, "Ludovico");
+    horarioEstudante(ArrStudentsClasses,ArrClasses, "Ludovico");
     //estudantesEmUcsAno(ArrStudentsClasses, '1');
     //ocupacaoUcsAno(ArrStudentsClasses,'1');
 }
