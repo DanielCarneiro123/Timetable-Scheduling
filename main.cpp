@@ -39,15 +39,15 @@ struct StudentsClassesStruct{
     string ClassCode;
 };
 
-///funcao para comparares strings
+///funcao para comparar strings
 bool strcomp0(string a, string b){
     return a<b;
 }
-
+///funcao para comparar ints
 bool strcomp1(string a, string b) {
     return a > b;
 }
-
+///funcao para comparar horas
 bool intcomp(classesStruct a, classesStruct b){
     return a.StartHour<b.StartHour;}
 
@@ -66,6 +66,7 @@ void ocupacaoTurma(const string cadeira, string turma, const vector<StudentsClas
 
     cout << "Number of people in class " << turma << " for UC " << cadeira << ": " << acc;
 }
+///Numero de pessoas a ir a UCs do ano x
 
 void ocupacaoUcsAno(const vector<StudentsClassesStruct>& arr, char ano){
     vector<string> v;
@@ -108,6 +109,7 @@ void estudantesTurma(const vector<StudentsClassesStruct>& arr, string turma){
     }
     cout << ".";
 }
+///Estudantes que têm UCs do ano x
 
 void estudantesEmUcsAno(const vector<StudentsClassesStruct>& arr, char ano){
     string sep = ":";
@@ -128,6 +130,7 @@ void estudantesEmUcsAno(const vector<StudentsClassesStruct>& arr, char ano){
     cout << ".";
 
 }
+///Todas as UCs que têm alunos inscritos
 void todasUcs(const vector<classesPerUcStruct>& arr){
     string sep = ":";
     vector<string> v;
@@ -137,13 +140,30 @@ void todasUcs(const vector<classesPerUcStruct>& arr){
         }
 
     }
-    cout << "Todas as UCs são: ";
+    cout << "The UCs that has at least one student assigned to it are: ";
     for (auto x: v){
-        cout << x << " ";
+        cout << sep << " " << x;
+        sep = ",";
 
     }
 
 }
+void todosEstudantes(const vector<StudentsClassesStruct>& arr){
+    string sep = ":";
+    vector<string> v;
+    for (const auto& x: arr){
+        if (!(find(v.begin(), v.end(), x.StudentName) != v.end())){
+            v.push_back(x.StudentName);
+        }
+
+    }
+    sort(v.begin(), v.end(), strcomp0);
+    cout << "All the students that are assigned to at least one UC are: ";
+    for (auto x: v){
+        cout << sep << " " << x;
+        sep = ",";
+
+    }}
 
 ///Estudantes em determinada UC x
 void estudantesUC(const vector<StudentsClassesStruct>& arr, string cadeira){
@@ -312,8 +332,9 @@ int main() {
     //estudantesTurma(ArrStudentsClasses, "1LEIC05");
     //ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
     //ocupacaoUc(ArrStudentsClasses, "L.EIC021");
-    //horarioEstudante(ArrStudentsClasses,ArrClasses, "ZezinhoDoBonezinho");
+    //horarioEstudante(ArrStudentsClasses,ArrClasses, "Rodrigo");
     //estudantesEmUcsAno(ArrStudentsClasses, '1');
     //ocupacaoUcsAno(ArrStudentsClasses,'1');
-    todasUcs(ArrClassesPerUc);
+    //todasUcs(ArrClassesPerUc);
+    //todosEstudantes(ArrStudentsClasses);
 }
