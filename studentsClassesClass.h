@@ -2,6 +2,7 @@
 // Created by up202108832 on 14/10/2022.
 //
 #include <string>
+using namespace std;
 #ifndef UNTITLED_STUDENTSCLASSESCLASS_H
 #define UNTITLED_STUDENTSCLASSESCLASS_H
 
