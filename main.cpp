@@ -6,38 +6,11 @@
 #include <ostream>
 #include <algorithm>
 #include <cstring>
+#include "StudentsClassesStruct.h"
+#include "classesPerUC.h"
+#include "classesStruct.h"
 
 using namespace std;
-
-/// *Parsing* do ficheiro classes.csv nos seus cinco atributos
-///
-/// This is the Complete Description
-struct classesStruct{
-    string ClassCode;
-    string UcCode;
-    string Weekday;
-    int StartHour{};
-    int Duration{};
-    string Type;
-};
-
-/// *Parsing* do ficheiro classes_per_uc.csv nos seus dois atributos.
-///
-/// This is the Complete Description
-struct classesPerUcStruct{
-    string UcCode;
-    string ClassCode;
-};
-
-/// *Parsing* do ficheiro student_classes.csv nos seus quatro atributos.
-///
-/// This is the Complete Description
-struct StudentsClassesStruct{
-    string StudentCode;
-    string StudentName;
-    string UcCode;
-    string ClassCode;
-};
 
 ///funcao para comparar strings
 bool strcomp0(string a, string b){
