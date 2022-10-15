@@ -84,7 +84,10 @@ void horarioEstudante(const vector<studentsClassesClass>& arr1, const vector<cla
 
 
 int main() {
-    
+    classesClass classesClass1;
+    classesPerUcClass classesPerUcClass1;
+    studentsClassesClass studentsClassesClass1;
+
     ifstream myFile;
     string CurrentLine;   // string usada para ler os ficheiros
 
@@ -93,7 +96,7 @@ int main() {
     vector<classesClass> ArrClasses;
     classesClass classe;
 
-    myFile.open("C:/Users/danie/CLionProjects/AED Project/classes.csv");
+    myFile.open("C:/Users/User/Desktop/projeto aed/classes.csv");
     getline(myFile,CurrentLine);
     string tempClassString; // string criada para poder copiar ints como classes.StartHour e classe.Duration para uma string
 
@@ -123,7 +126,7 @@ int main() {
     vector<classesPerUcClass> ArrClassesPerUc;
     classesPerUcClass classPerUc;
 
-    myFile.open("C:/Users/danie/CLionProjects/AED Project/classes_per_uc.csv");
+    myFile.open("C:/Users/User/Desktop/projeto aed/classes_per_uc.csv");
     getline(myFile,CurrentLine);
     while(getline(myFile,CurrentLine)) {
         stringstream inputString(CurrentLine);
@@ -141,7 +144,7 @@ int main() {
     vector<studentsClassesClass> ArrStudentsClasses;
     studentsClassesClass studentClasses;
 
-    myFile.open("C:/Users/danie/CLionProjects/AED Project/students_classes.csv");
+    myFile.open("C:/Users/User/Desktop/projeto aed/students_classes.csv");
     getline(myFile,CurrentLine);
 
     while(getline(myFile,CurrentLine)) {
@@ -156,13 +159,14 @@ int main() {
 
     }
 
-    studentsClassesClass::turmasUC(ArrStudentsClasses,"L.EIC012");
-    //studentsClassesClass::estudantesTurma(ArrStudentsClasses, "1LEIC05");
-    //studentsClassesClass::ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
-    //studentsClassesClass::ocupacaoUc(ArrStudentsClasses, "L.EIC021");
+    //studentsClassesClass1.turmasUC(ArrStudentsClasses,"L.EIC012");
+    //studentsClassesClass1.estudantesTurma(ArrStudentsClasses, "1LEIC05");
+    //studentsClassesClass1.ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
+    //studentsClassesClass1.ocupacaoUc(ArrStudentsClasses, "L.EIC021");
     //horarioEstudante(ArrStudentsClasses,ArrClasses, "Rodrigo");
     //studentsClassesClass::estudantesEmUcsAno(ArrStudentsClasses, '1');
-    //studentsClassesClass::ocupacaoUcsAno(ArrStudentsClasses,'1');
-    //classesPerUcClass::todasUcs(ArrClassesPerUc);
-    //studentsClassesClass::todosEstudantes(ArrStudentsClasses);
+    //studentsClassesClass1.ocupacaoUcsAno(ArrStudentsClasses,'1');
+    //classesPerUcClass1.todasUcs(ArrClassesPerUc);
+    //studentsClassesClass1.todosEstudantes(ArrStudentsClasses);
+    studentsClassesClass::pedidoAlteracaoHorario("Iara",50,"L.EIC002","1LEIC08",ArrStudentsClasses);
 }

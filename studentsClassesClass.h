@@ -12,7 +12,7 @@ public:
     string ClassCode;
     static bool strcomp0(string a, string b);
     static bool strcomp1(string a, string b);
-    static void ocupacaoTurma(const string cadeira, string turma, const vector<studentsClassesClass>& arr);
+    static int ocupacaoTurma(const string cadeira, string turma, const vector<studentsClassesClass>& arr);
     static void ocupacaoUcsAno(const vector<studentsClassesClass>& arr, char ano);
     static void ocupacaoUc(const vector<studentsClassesClass>& arr, string cadeira);
     static void estudantesTurma(const vector<studentsClassesClass>& arr, string turma);
@@ -20,6 +20,8 @@ public:
     static void todosEstudantes(const vector<studentsClassesClass>& arr);
     static void estudantesUC(const vector<studentsClassesClass>& arr, string cadeira);
     static void turmasUC(const vector<studentsClassesClass>& arr, string uc);
+    static void pedidoAlteracaoHorario(const string nome, const int Cap, const string cadeira, const string novaTurma, const vector<studentsClassesClass> &arr);
+    static bool diferençaDeAlunosTurma(const string cadeira, const vector<studentsClassesClass>& arr);
 };
 
 
