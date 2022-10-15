@@ -12,176 +12,6 @@
 
 using namespace std;
 
-///funcao para comparar strings
-bool strcomp0(string a, string b){
-    return a<b;
-}
-///funcao para comparar ints
-bool strcomp1(string a, string b) {
-    return a > b;
-}
-///funcao para comparar horas
-bool intcomp(classesClass a, classesClass b){
-    return a.StartHour<b.StartHour;}
-
-
-///Numero de estudantes numa turma x (Ocuupação da turma)
-
-void ocupacaoTurma(const string cadeira, string turma, const vector<studentsClassesClass>& arr){
-    int acc=0;
-    for (const auto& x:arr){
-        int i = x.UcCode.compare(cadeira);
-        int j = x.ClassCode.compare(turma);
-        if (i==0 && j==0){
-            acc++;
-        }
-    }
-
-    cout << "Number of people in class " << turma << " for UC " << cadeira << ": " << acc;
-}
-///Numero de pessoas a ir a UCs do ano x
-
-void ocupacaoUcsAno(const vector<studentsClassesClass>& arr, char ano){
-    vector<string> v;
-    for (const auto& x: arr){
-        if(x.ClassCode.at(0) == ano && !(find(v.begin(), v.end(), x.StudentName) != v.end())){
-            v.push_back(x.StudentName);
-        }}
-    int acc=0;
-    for (auto x: v) acc++;
-    cout << "Number of people attending UCs belonging to ano " << ano << ": " << acc;
-}
-///Número de estudantes numa UC x (Ocupação UC)
-
-void ocupacaoUc(const vector<studentsClassesClass>& arr, string cadeira){
-    int sum = 0;
-    for (const auto& x: arr){
-        int i = x.UcCode.compare(cadeira);
-        if (i == 0){
-            sum++;
-        }
-    }
-    cout << "Number of students in UC " << cadeira << ": " << sum;
-}
-
-///Estudantes em determinada turma x
-
-void estudantesTurma(const vector<studentsClassesClass>& arr, string turma){
-    string sep = ":";
-    vector<string> names;
-    cout << "The students that belong to class " << turma << " are";
-    for (const auto& x: arr){
-        if (x.ClassCode.compare(turma) == 0){
-            names.push_back(x.StudentName);
-        }
-    }
-    sort(names.begin(), names.end(), strcomp1);
-    for (const auto& n: names){
-        cout << sep << " " << n;
-        sep = ",";
-    }
-    cout << ".";
-}
-///Estudantes que têm UCs do ano x
-
-void estudantesEmUcsAno(const vector<studentsClassesClass>& arr, char ano){
-    string sep = ":";
-    vector<string> v;
-    for (const auto& x: arr){
-        if(x.ClassCode.at(0) == ano && !(find(v.begin(), v.end(), x.StudentName) != v.end())){
-            v.push_back(x.StudentName);
-        }
-
-    }
-    sort(v.begin(), v.end(), strcomp1);
-    cout << "The students that are attending UCs belonging to year " << ano << " are";
-    for (auto x : v){
-        cout << sep << " " << x;
-        sep = ",";
-
-    }
-    cout << ".";
-
-}
-///Todas as UCs que têm alunos inscritos
-void todasUcs(const vector<classesPerUcClass>& arr){
-    string sep = ":";
-    vector<string> v;
-    for (const auto& x: arr){
-        if (!(find(v.begin(), v.end(), x.UcCode) != v.end())){
-            v.push_back(x.UcCode);
-        }
-
-    }
-    cout << "The UCs that has at least one student assigned to it are: ";
-    for (auto x: v){
-        cout << sep << " " << x;
-        sep = ",";
-
-    }
-
-}
-void todosEstudantes(const vector<studentsClassesClass>& arr){
-    string sep = ":";
-    vector<string> v;
-    for (const auto& x: arr){
-        if (!(find(v.begin(), v.end(), x.StudentName) != v.end())){
-            v.push_back(x.StudentName);
-        }
-
-    }
-    sort(v.begin(), v.end(), strcomp0);
-    cout << "All the students that are assigned to at least one UC are: ";
-    for (auto x: v){
-        cout << sep << " " << x;
-        sep = ",";
-
-    }}
-
-///Estudantes em determinada UC x
-void estudantesUC(const vector<studentsClassesClass>& arr, string cadeira){
-    string sep = ":";
-    vector<string> v;
-    cout << "The students that are attending UC " << cadeira << " are";
-    for (const auto& x: arr){
-        if (x.UcCode.compare(cadeira) == 0){
-            v.push_back(x.StudentName);
-        }
-    }
-    sort(v.begin(), v.end(), strcomp1);
-    for (const auto& n: v){
-        cout << sep << " " << n;
-        sep = ",";
-    }
-    cout << ".";
-}
-
-///turmas de cada UC
-void turmasUC(const vector <studentsClassesClass>& arr, string uc){
-    string sep = ":";
-    int sum = 0;
-    vector<string> v;
-    for (const auto& x: arr){
-        if (x.UcCode.compare(uc) == 0 && !(find(v.begin(), v.end(), x.ClassCode) != v.end()) ){
-            v.push_back(x.ClassCode);
-            sum++;
-        }
-    }
-    sort(v.begin(), v.end(), strcomp0);
-    if (sum == 0){
-        cout << "It doesn´t exist any UC with that code.";
-    }
-    else{
-        cout << "The classes that are attending UC " << uc << " are";
-        for (const auto& n: v){
-            cout << sep << " " << n;
-            sep = ",";
-        }
-        cout << ". " << sum << " classes in total.";
-    }
-
-}
-
 ///Horário de determinado estudante
 
 void horarioEstudante(const vector<studentsClassesClass>& arr1, const vector<classesClass>& arr2, string nomeEstudante) {
@@ -202,23 +32,23 @@ void horarioEstudante(const vector<studentsClassesClass>& arr1, const vector<cla
                 if (n1 == 0 && n2 == 0) {
                     if (y.Weekday.compare("Monday") == 0) {
                         v1.push_back(y);
-                        sort(v1.begin(), v1.end(), intcomp);
+                        sort(v1.begin(), v1.end(), classesClass::intcomp);
                     }
                     if (y.Weekday.compare("Tuesday") == 0) {
                         v2.push_back(y);
-                        sort(v2.begin(), v2.end(), intcomp);
+                        sort(v2.begin(), v2.end(), classesClass::intcomp);
                     }
                     if (y.Weekday.compare("Wednesday") == 0) {
                         v3.push_back(y);
-                        sort(v3.begin(), v3.end(), intcomp);
+                        sort(v3.begin(), v3.end(), classesClass::intcomp);
                     }
                     if (y.Weekday.compare("Thursday") == 0) {
                         v4.push_back(y);
-                        sort(v4.begin(), v4.end(), intcomp);
+                        sort(v4.begin(), v4.end(), classesClass::intcomp);
                     }
                     if (y.Weekday.compare("Friday") == 0) {
                         v5.push_back(y);
-                        sort(v5.begin(), v5.end(), intcomp);
+                        sort(v5.begin(), v5.end(), classesClass::intcomp);
                     }
 
                 }
@@ -254,6 +84,10 @@ void horarioEstudante(const vector<studentsClassesClass>& arr1, const vector<cla
 
 
 int main() {
+    classesClass classesClass1;
+    classesPerUcClass classesPerUcClass1;
+    studentsClassesClass studentsClassesClass1;
+
     ifstream myFile;
     string CurrentLine;   // string usada para ler os ficheiros
 
@@ -262,7 +96,7 @@ int main() {
     vector<classesClass> ArrClasses;
     classesClass classe;
 
-    myFile.open("C:/Users/up202108832/CLionProjects/untitled/classes.csv");
+    myFile.open("C:/Users/danie/CLionProjects/AED Project/classes.csv");
     getline(myFile,CurrentLine);
     string tempClassString; // string criada para poder copiar ints como classes.StartHour e classe.Duration para uma string
 
@@ -292,7 +126,7 @@ int main() {
     vector<classesPerUcClass> ArrClassesPerUc;
     classesPerUcClass classPerUc;
 
-    myFile.open("C:/Users/up202108832/CLionProjects/untitled/classes_per_uc.csv");
+    myFile.open("C:/Users/danie/CLionProjects/AED Project/classes_per_uc.csv");
     getline(myFile,CurrentLine);
     while(getline(myFile,CurrentLine)) {
         stringstream inputString(CurrentLine);
@@ -310,7 +144,7 @@ int main() {
     vector<studentsClassesClass> ArrStudentsClasses;
     studentsClassesClass studentClasses;
 
-    myFile.open("C:/Users/up202108832/CLionProjects/untitled/students_classes.csv");
+    myFile.open("C:/Users/danie/CLionProjects/AED Project/students_classes.csv");
     getline(myFile,CurrentLine);
 
     while(getline(myFile,CurrentLine)) {
@@ -325,13 +159,13 @@ int main() {
 
     }
 
-    turmasUC(ArrStudentsClasses,"L.EIC009");
-    //estudantesTurma(ArrStudentsClasses, "1LEIC05");
-    //ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
-    //ocupacaoUc(ArrStudentsClasses, "L.EIC021");
+    //studentsClassesClass1.turmasUC(ArrStudentsClasses,"L.EIC012");
+    //studentsClassesClass1.estudantesTurma(ArrStudentsClasses, "1LEIC05");
+    //studentsClassesClass1.ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
+    //studentsClassesClass1.ocupacaoUc(ArrStudentsClasses, "L.EIC021");
     //horarioEstudante(ArrStudentsClasses,ArrClasses, "Rodrigo");
-    //estudantesEmUcsAno(ArrStudentsClasses, '1');
-    //ocupacaoUcsAno(ArrStudentsClasses,'1');
-    //todasUcs(ArrClassesPerUc);
-    //todosEstudantes(ArrStudentsClasses);
+    //studentsClassesClass1.estudantesEmUcsAno(ArrStudentsClasses, '1');
+    //studentsClassesClass1.ocupacaoUcsAno(ArrStudentsClasses,'1');
+    //classesPerUcClass1.todasUcs(ArrClassesPerUc);
+    //studentsClassesClass1.todosEstudantes(ArrStudentsClasses);
 }

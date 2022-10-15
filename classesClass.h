@@ -1,6 +1,3 @@
-//
-// Created by up202108832 on 14/10/2022.
-//
 #include <string>
 using namespace std;
 #ifndef UNTITLED_CLASSESCLASS_H
@@ -15,6 +12,7 @@ public:
     int StartHour{};
     int Duration{};
     string Type;
+    static bool intcomp(classesClass a, classesClass b);
 };
 
 
