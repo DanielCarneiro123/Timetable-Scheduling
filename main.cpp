@@ -84,10 +84,7 @@ void horarioEstudante(const vector<studentsClassesClass>& arr1, const vector<cla
 
 
 int main() {
-    classesClass classesClass1;
-    classesPerUcClass classesPerUcClass1;
-    studentsClassesClass studentsClassesClass1;
-
+    
     ifstream myFile;
     string CurrentLine;   // string usada para ler os ficheiros
 
@@ -159,13 +156,13 @@ int main() {
 
     }
 
-    //studentsClassesClass1.turmasUC(ArrStudentsClasses,"L.EIC012");
-    //studentsClassesClass1.estudantesTurma(ArrStudentsClasses, "1LEIC05");
-    //studentsClassesClass1.ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
-    //studentsClassesClass1.ocupacaoUc(ArrStudentsClasses, "L.EIC021");
+    studentsClassesClass::turmasUC(ArrStudentsClasses,"L.EIC012");
+    //studentsClassesClass::estudantesTurma(ArrStudentsClasses, "1LEIC05");
+    //studentsClassesClass::ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
+    //studentsClassesClass::ocupacaoUc(ArrStudentsClasses, "L.EIC021");
     //horarioEstudante(ArrStudentsClasses,ArrClasses, "Rodrigo");
-    //studentsClassesClass1.estudantesEmUcsAno(ArrStudentsClasses, '1');
-    //studentsClassesClass1.ocupacaoUcsAno(ArrStudentsClasses,'1');
-    //classesPerUcClass1.todasUcs(ArrClassesPerUc);
-    //studentsClassesClass1.todosEstudantes(ArrStudentsClasses);
+    //studentsClassesClass::estudantesEmUcsAno(ArrStudentsClasses, '1');
+    //studentsClassesClass::ocupacaoUcsAno(ArrStudentsClasses,'1');
+    //classesPerUcClass::todasUcs(ArrClassesPerUc);
+    //studentsClassesClass::todosEstudantes(ArrStudentsClasses);
 }
