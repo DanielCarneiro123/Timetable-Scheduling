@@ -22,6 +22,8 @@ public:
     static void turmasUC(const vector<studentsClassesClass>& arr, string uc);
     static void pedidoAlteracaoHorario(const string nome, const int Cap, const string cadeira, const string novaTurma, const vector<studentsClassesClass> &arr);
     static bool diferençaDeAlunosTurma(const string cadeira, const vector<studentsClassesClass>& arr);
+    static void removerEstudante(const string nome, const string cadeira, const string turma, vector<studentsClassesClass>& arr);
+    static void adicionarEstudante(const string nome, const string cadeira, vector<studentsClassesClass>& arr);
 };
 
 

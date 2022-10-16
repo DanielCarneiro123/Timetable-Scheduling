@@ -168,5 +168,6 @@ int main() {
     //studentsClassesClass1.ocupacaoUcsAno(ArrStudentsClasses,'1');
     //classesPerUcClass1.todasUcs(ArrClassesPerUc);
     //studentsClassesClass1.todosEstudantes(ArrStudentsClasses);
-    studentsClassesClass::pedidoAlteracaoHorario("Iara",50,"L.EIC002","1LEIC08",ArrStudentsClasses);
+    //studentsClassesClass::pedidoAlteracaoHorario("Iara",50,"L.EIC002","1LEIC08",ArrStudentsClasses);
+    studentsClassesClass::removerEstudante("Jose Jesualdo", "L.EIC023", "3LEIC08", ArrStudentsClasses);
 }

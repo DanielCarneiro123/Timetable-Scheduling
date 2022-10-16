@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <sstream>
+#include <string>
 #include "studentsClassesClass.h"
 using namespace std;
 
@@ -23,12 +25,33 @@ void studentsClassesClass::pedidoAlteracaoHorario(const string nome, const int C
                 x.ClassCode = novaTurma;
                 cout << "Feito, trocaste de turma";
             }
-            if (diferençaDeAlunosTurma(cadeira, arr) == 0 && n_alunosTurma >= Cap) cout << "Não deu para trocares de turma pois causa desiquilibrio e a turma também não tinha vagas.";
-            if (diferençaDeAlunosTurma(cadeira, arr) == 0) cout << "Não deu para trocares de turma pois causa desiquilibrio entre turmas.";
+            if (diferençaDeAlunosTurma(cadeira, arr) == 0 && n_alunosTurma >= Cap) cout << "Não deu para trocares de turma pois causa desequilibrio e a turma também não tinha vagas.";
+            if (diferençaDeAlunosTurma(cadeira, arr) == 0) cout << "Não deu para trocares de turma pois causa desequilibrio entre turmas.";
             if (n_alunosTurma >= Cap) cout<< "Não deu para trocares de turma pois a turma não tem vagas.";
         }
     }
 }
+
+void studentsClassesClass::removerEstudante(const string nome, const string cadeira, const string turma, vector<studentsClassesClass>& arr){
+    for (const auto& x: arr){
+        if (x.StudentName == nome && x.ClassCode == turma && x.UcCode == cadeira){
+            x.ClassCode = NULL;
+        }
+    }
+    cout << "Remocao feita.";
+}
+
+void studentsClassesClass::adicionarEstudante(const string nome, const string cadeira, vector<studentsClassesClass>& arr){
+    string empty = "";
+    for (const auto& x: arr){
+        if (x.StudentName == nome && x.UcCode == empty){
+            x.UcCode = cadeira;
+        }
+    }
+    cout << "Adicao feita.";
+}
+
+
 
 bool studentsClassesClass::diferençaDeAlunosTurma(const string cadeira, const vector<studentsClassesClass>& arr){
     vector<string> v;
