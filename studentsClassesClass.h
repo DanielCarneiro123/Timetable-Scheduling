@@ -20,10 +20,11 @@ public:
     static void todosEstudantes(const vector<studentsClassesClass>& arr);
     static void estudantesUC(const vector<studentsClassesClass>& arr, string cadeira);
     static void turmasUC(const vector<studentsClassesClass>& arr, string uc);
-    static void pedidoAlteracaoHorario(const string nome, const int Cap, const string cadeira, const string novaTurma, const vector<studentsClassesClass> &arr);
-    static bool diferençaDeAlunosTurma(const string cadeira, const vector<studentsClassesClass>& arr);
-    static void removerEstudante(const string nome, const string cadeira, const string turma, vector<studentsClassesClass>& arr);
-    static void adicionarEstudante(const string nome, const string cadeira, vector<studentsClassesClass>& arr);
+    static void pedidoAlteracaoHorario(const string nome, const string cadeira, const string novaTurma, vector<studentsClassesClass> &arr);
+    static bool diferencaDeAlunosTurma(const string cadeira, const vector<studentsClassesClass>& arr);
+    static void adicionarEstudante(const string nome, const string cadeira, const string turma, vector<studentsClassesClass>& arr);
+    static void removerEstudante(const string nome, const string cadeira, vector<studentsClassesClass>& arr);
+    static void alteraçaoVariasTurmas(vector<studentsClassesClass> &arr);
 };
 
 

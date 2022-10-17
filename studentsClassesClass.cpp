@@ -14,66 +14,7 @@ bool studentsClassesClass::strcomp0(string a, string b){
 bool studentsClassesClass::strcomp1(string a, string b) {
     return a > b;
 }
-
-void studentsClassesClass::pedidoAlteracaoHorario(const string nome, const int Cap, const string cadeira, const string novaTurma, const vector<studentsClassesClass>& arr){
-    int n_alunosTurma = ocupacaoTurma(cadeira, novaTurma, arr);
-    for (const auto& x : arr){
-        if (x.StudentName == nome && x.UcCode == cadeira) {
-            if (n_alunosTurma < Cap && diferençaDeAlunosTurma(cadeira, arr)) {
-                //removerEstudante();
-                //adicionarEstudante();
-                x.ClassCode = novaTurma;
-                cout << "Feito, trocaste de turma";
-            }
-            if (diferençaDeAlunosTurma(cadeira, arr) == 0 && n_alunosTurma >= Cap) cout << "Não deu para trocares de turma pois causa desequilibrio e a turma também não tinha vagas.";
-            if (diferençaDeAlunosTurma(cadeira, arr) == 0) cout << "Não deu para trocares de turma pois causa desequilibrio entre turmas.";
-            if (n_alunosTurma >= Cap) cout<< "Não deu para trocares de turma pois a turma não tem vagas.";
-        }
-    }
-}
-
-void studentsClassesClass::removerEstudante(const string nome, const string cadeira, const string turma, vector<studentsClassesClass>& arr){
-    for (const auto& x: arr){
-        if (x.StudentName == nome && x.ClassCode == turma && x.UcCode == cadeira){
-            x.ClassCode = NULL;
-        }
-    }
-    cout << "Remocao feita.";
-}
-
-void studentsClassesClass::adicionarEstudante(const string nome, const string cadeira, vector<studentsClassesClass>& arr){
-    string empty = "";
-    for (const auto& x: arr){
-        if (x.StudentName == nome && x.UcCode == empty){
-            x.UcCode = cadeira;
-        }
-    }
-    cout << "Adicao feita.";
-}
-
-
-
-bool studentsClassesClass::diferençaDeAlunosTurma(const string cadeira, const vector<studentsClassesClass>& arr){
-    vector<string> v;
-    int maior = INT_MIN;
-    int menor = INT_MAX;
-
-    for (const auto& x: arr){
-        if (x.UcCode.compare(cadeira) == 0 && !(find(v.begin(), v.end(), x.ClassCode) != v.end()) ){
-            v.push_back(x.ClassCode);
-        }
-    }
-    sort(v.begin(), v.end(), strcomp0);
-    for (const auto& y: v) {
-        if (ocupacaoTurma(cadeira, y, arr) > maior) maior = ocupacaoTurma(cadeira, y, arr);
-        if (ocupacaoTurma(cadeira, y, arr) < menor) menor = ocupacaoTurma(cadeira, y, arr);
-    }
-    if ( maior - menor < 4) return true;
-    return false;
-}
-
 ///Numero de estudantes numa turma x (Ocuupação da turma)
-
 int studentsClassesClass::ocupacaoTurma(const string cadeira, string turma, const vector<studentsClassesClass>& arr){
     int acc=0;
     for (const auto& x:arr){
@@ -88,6 +29,99 @@ int studentsClassesClass::ocupacaoTurma(const string cadeira, string turma, cons
 
     return acc;
 }
+
+void studentsClassesClass::removerEstudante(const string nome, const string cadeira, vector<studentsClassesClass>& arr){
+    int i=0;
+    for (const auto& x: arr){
+        if (x.StudentName == nome && x.UcCode == cadeira){
+            arr[i].ClassCode = "NoClass";
+            i++;
+        }
+        i++;
+    }
+    cout << "The student has been removed from current class." << endl;
+}
+
+void studentsClassesClass::adicionarEstudante(const string nome, const string cadeira, const string turma, vector<studentsClassesClass>& arr){
+    int i=0;
+    for (const auto& x: arr){
+        if (x.StudentName == nome && x.ClassCode == "NoClass" && x.UcCode == cadeira){
+            arr[i].ClassCode = turma;
+            i++;
+        }
+        i++;
+    }
+    cout << "The student has been added to new class " << turma << " for UC " << cadeira << endl;
+}
+
+bool studentsClassesClass::diferencaDeAlunosTurma(const string cadeira, const vector<studentsClassesClass>& arr){
+    vector<string> v;
+    int maior = INT_MIN;
+    int menor = INT_MAX;
+
+    for (const auto& x: arr){
+        if (x.UcCode.compare(cadeira) == 0 && !(find(v.begin(), v.end(), x.ClassCode) != v.end()) ){
+            v.push_back(x.ClassCode);
+        }
+    }
+    sort(v.begin(), v.end(), strcomp0);
+    for (const auto& y: v) {
+        if (ocupacaoTurma(cadeira, y, arr) > maior) maior = ocupacaoTurma(cadeira, y, arr);
+        if (ocupacaoTurma(cadeira, y, arr) < menor) menor = ocupacaoTurma(cadeira, y, arr);
+    }
+    if ( maior - menor < 50) return true;
+    return false;
+}
+
+void studentsClassesClass::pedidoAlteracaoHorario(const std::string nome, const std::string cadeira,const std::string novaTurma,vector<studentsClassesClass> &arr) {
+    int Cap = 50;
+    int n_alunosTurma = ocupacaoTurma(cadeira, novaTurma, arr);
+    for (const auto& x : arr){
+        if (x.StudentName == nome && x.UcCode == cadeira) {
+            if (n_alunosTurma < Cap && diferencaDeAlunosTurma(cadeira, arr)) {
+                removerEstudante(nome,cadeira,arr);
+                adicionarEstudante(nome,cadeira,novaTurma,arr);
+            }
+            if (diferencaDeAlunosTurma(cadeira, arr) == 0 && n_alunosTurma >= Cap) cout << "Não deu para trocares de turma pois causa desequilibrio e a turma também não tinha vagas.";
+            else{
+                if (diferencaDeAlunosTurma(cadeira, arr) == 0) cout << "Não deu para trocares de turma pois causa desequilibrio entre turmas.";
+                if (n_alunosTurma >= Cap) cout<< "Não deu para trocares de turma pois a turma não tem vagas.";
+            }
+
+        }
+    }
+}
+
+void studentsClassesClass::alteraçaoVariasTurmas(vector<studentsClassesClass> &arr){
+
+    struct pedido {
+        string Uc;
+        string novaTurma;
+        string nome;
+    };
+    pedido x;
+    vector<pedido> v;
+    bool flag = 1;
+    cout << "Qual é o teu nome?" << endl;
+    cin >> x.nome;
+    while(flag) {
+        cout << "Qual é a UC?" << endl;
+        cin >> x.Uc;
+        cout << "E qual é a nova turma?" << endl;
+        cin >> x.novaTurma;
+        cout << "Queres mudar mais alguma? Carrega '1' para 'Sim' ou '0' para não" << endl;
+        cin >> flag;
+        v.push_back(x);
+    }
+    for (auto y : v ){
+        pedidoAlteracaoHorario( y.nome, y.Uc, y.novaTurma, arr);
+
+    }
+}
+
+
+
+
 ///Numero de pessoas a ir a UCs do ano x
 
 void studentsClassesClass::ocupacaoUcsAno(const vector<studentsClassesClass>& arr, char ano){
