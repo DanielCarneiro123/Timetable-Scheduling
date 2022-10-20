@@ -154,11 +154,73 @@ int main() {
         getline(inputString, studentClasses.UcCode, ',');
         getline(inputString, studentClasses.ClassCode, ',');
         ArrStudentsClasses.push_back(studentClasses);
-
         CurrentLine= "";
-
     }
 
+    string stringResposta;
+    int intResposta;
+    cout << "=========================What action do you wish to do?===========================" << endl;
+    cout << "Actions related to students (Students in UCs, Classes,...) - [PRESS 1]" << endl;
+    cout << "Actions related to UCs (Occupation of UC,Classes Per UC, All UCs,...) - [PRESS 2]" << endl;
+    cout << "Actions related to Classes (Occupation of Class,...) - [PRESS 3]" << endl;
+    cout << "Request to Change Schedule - [PRESS 4]" << endl;
+    cout << "=================================================================================" << endl;
+    cin >> intResposta;
+    if (intResposta == 1){
+        intResposta=0;
+        cout << "=================What action do you wish to do?===================" << endl;
+        cout << "If you want to see which students are in a certain class [PRESS 1]" << endl;
+        cout << "If you want to see all students [PRESS 2]" << endl;
+        cout << "If you want to see all students belonging to a year [PRESS 3]" << endl;
+        cout << "If you want to see all students from an UCs [PRESS 4]" << endl;
+        cout << "==================================================================" << endl;
+        cin >> intResposta;
+        if (intResposta==1){
+            cout << "Which class do you want see? || FORMAT:1LEIC01";
+            cin >> stringResposta;
+            studentsClassesClass::estudantesTurma(ArrStudentsClasses, stringResposta);
+        }
+        if (intResposta == 2){
+            studentsClassesClass::todosEstudantes(ArrStudentsClasses);
+        }
+        if (intResposta == 3){
+            cout << "Which year do you want see?";
+            cin >> intResposta;
+            studentsClassesClass::estudantesEmUcsAno(ArrStudentsClasses, intResposta);
+        }
+        if (intResposta == 4){
+            cout << "Which UC do you want see?";
+            cin >> stringResposta;
+            studentsClassesClass::estudantesUC(ArrStudentsClasses, stringResposta);
+        }
+    }
+    if (intResposta == 2){
+        intResposta = 0;
+        cout << "=====================What action do you wish to do?=======================" << endl;
+        cout << "If you want to see which students are in UCs from a certain year [PRESS 1]" << endl;
+        cout << "If you want to see all UCs [PRESS 2]" << endl;
+        cout << "If you want to see all students belonging to an UC [PRESS 3]" << endl;
+        cout << "==========================================================================" << endl;
+        if (intResposta == 1){
+            cin >> intResposta;
+            studentsClassesClass::ocupacaoUcsAno(ArrStudentsClasses, intResposta);
+        }
+        if (intResposta == 2){
+            classesPerUcClass::todasUcs(ArrClassesPerUc);
+        }
+        if (intResposta == 3){
+            cin >> stringResposta;
+            studentsClassesClass::ocupacaoUc(ArrStudentsClasses, stringResposta);
+        }
+    }
+    if (intResposta == 3){
+        cin >> stringResposta;
+        studentsClassesClass::turmasUC(ArrStudentsClasses, stringResposta);
+    }
+    if (intResposta == 4){
+        studentsClassesClass::alteraçaoVariasTurmas(ArrStudentsClasses);
+    }
+}
     //studentsClassesClass1.turmasUC(ArrStudentsClasses,"L.EIC012");
     //studentsClassesClass1.estudantesTurma(ArrStudentsClasses, "1LEIC05");
     //studentsClassesClass1.ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
@@ -171,6 +233,3 @@ int main() {
     //studentsClassesClass::pedidoAlteracaoHorario("Iara","L.EIC002","1LEIC08",ArrStudentsClasses);
     //removerEstudante("Jose Jesualdo", "L.EIC023", "3LEIC08", ArrStudentsClasses);
     studentsClassesClass::alteraçaoVariasTurmas(ArrStudentsClasses);
-
-}
-
