@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <sstream>
 #include <string>
+#include <queue>
+#include <set>
 #include "studentsClassesClass.h"
 using namespace std;
 
@@ -109,13 +111,13 @@ void studentsClassesClass::alteraçaoVariasTurmas(vector<studentsClassesClass> &
         cin >> x.Uc;
         cout << "E qual é a nova turma?" << endl;
         cin >> x.novaTurma;
+        cout << "O seu pedido foi adicionado a fila";
         cout << "Queres mudar mais alguma? Carrega '1' para 'Sim' ou '0' para não" << endl;
         cin >> flag;
         v.push_back(x);
     }
     for (auto y : v ){
         pedidoAlteracaoHorario( y.nome, y.Uc, y.novaTurma, arr);
-
     }
 }
 
@@ -132,7 +134,7 @@ void studentsClassesClass::ocupacaoUcsAno(const vector<studentsClassesClass>& ar
         }}
     int acc=0;
     for (auto x: v) acc++;
-    cout << "Number of people attending UCs belonging to ano " << ano << ": " << acc;
+    cout << "Number of people attending UCs belonging to year " << ano << ": " << acc;
 }
 ///Número de estudantes numa UC x (Ocupação UC)
 
@@ -188,20 +190,22 @@ void studentsClassesClass::estudantesEmUcsAno(const vector<studentsClassesClass>
 }
 void studentsClassesClass::todosEstudantes(const vector<studentsClassesClass>& arr){
     string sep = ":";
-    vector<string> v;
+    set<string> v;
     for (const auto& x: arr){
         if (!(find(v.begin(), v.end(), x.StudentName) != v.end())){
-            v.push_back(x.StudentName);
+            v.insert(x.StudentName);
         }
 
-    }
-    sort(v.begin(), v.end(), strcomp0);
+    }1
     cout << "All the students that are assigned to at least one UC are: ";
     for (auto x: v){
         cout << sep << " " << x;
         sep = ",";
+    }
+    cout << endl;
+}
 
-    }}
+
 
 ///Estudantes em determinada UC x
 void studentsClassesClass::estudantesUC(const vector<studentsClassesClass>& arr, string cadeira){

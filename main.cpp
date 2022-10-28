@@ -6,6 +6,7 @@
 #include <ostream>
 #include <algorithm>
 #include <cstring>
+#include <set>
 #include "studentsClassesClass.h"
 #include "classesPerUcClass.h"
 #include "classesClass.h"
@@ -114,7 +115,7 @@ int main() {
         classe.Duration=atoi(tempClassString.c_str());
 
         getline(inputString,classe.Type,',');
-
+        if (classe.Type.back() == '\r') classe.Type.pop_back();
         ArrClasses.push_back(classe);
 
         CurrentLine = "";
@@ -132,8 +133,8 @@ int main() {
         stringstream inputString(CurrentLine);
         getline(inputString, classPerUc.UcCode, ',');
         getline(inputString, classPerUc.ClassCode, ',');
+        if (classe.ClassCode.back() == '\r') classe.ClassCode.pop_back();
         ArrClassesPerUc.push_back(classPerUc);
-
         CurrentLine= "";
     }
     myFile.close();
@@ -153,6 +154,7 @@ int main() {
         getline(inputString, studentClasses.StudentName, ',');
         getline(inputString, studentClasses.UcCode, ',');
         getline(inputString, studentClasses.ClassCode, ',');
+        if (classe.ClassCode.back() == '\r') classe.ClassCode.pop_back();
         ArrStudentsClasses.push_back(studentClasses);
         CurrentLine= "";
     }
@@ -230,15 +232,15 @@ int main() {
     }
 
 }
-    //studentsClassesClass1.turmasUC(ArrStudentsClasses,"L.EIC012");
-    //studentsClassesClass1.estudantesTurma(ArrStudentsClasses, "1LEIC05");
-    //studentsClassesClass1.ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
-    //studentsClassesClass1.ocupacaoUc(ArrStudentsClasses, "L.EIC021");
-    //horarioEstudante(ArrStudentsClasses,ArrClasses, "Rodrigo");
-    //studentsClassesClass::estudantesEmUcsAno(ArrStudentsClasses, '1');
-    //studentsClassesClass1.ocupacaoUcsAno(ArrStudentsClasses,'1');
-    //classesPerUcClass1.todasUcs(ArrClassesPerUc);
-    //studentsClassesClass1.todosEstudantes(ArrStudentsClasses);
-    //studentsClassesClass::pedidoAlteracaoHorario("Iara","L.EIC002","1LEIC08",ArrStudentsClasses);
-    //removerEstudante("Jose Jesualdo", "L.EIC023", "3LEIC08", ArrStudentsClasses);
-    //studentsClassesClass::alteraçaoVariasTurmas(ArrStudentsClasses);
+//studentsClassesClass1.turmasUC(ArrStudentsClasses,"L.EIC012");
+//studentsClassesClass1.estudantesTurma(ArrStudentsClasses, "1LEIC05");
+//studentsClassesClass1.ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
+//studentsClassesClass1.ocupacaoUc(ArrStudentsClasses, "L.EIC021");
+//horarioEstudante(ArrStudentsClasses,ArrClasses, "Rodrigo");
+//studentsClassesClass::estudantesEmUcsAno(ArrStudentsClasses, '1');
+//studentsClassesClass1.ocupacaoUcsAno(ArrStudentsClasses,'1');
+//classesPerUcClass1.todasUcs(ArrClassesPerUc);
+//studentsClassesClass1.todosEstudantes(ArrStudentsClasses);
+//studentsClassesClass::pedidoAlteracaoHorario("Iara","L.EIC002","1LEIC08",ArrStudentsClasses);
+//removerEstudante("Jose Jesualdo", "L.EIC023", "3LEIC08", ArrStudentsClasses);
+//studentsClassesClass::alteraçaoVariasTurmas(ArrStudentsClasses);
