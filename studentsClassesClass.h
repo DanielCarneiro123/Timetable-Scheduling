@@ -1,4 +1,5 @@
 #include <string>
+#include <queue>
 using namespace std;
 #ifndef UNTITLED_STUDENTSCLASSESCLASS_H
 #define UNTITLED_STUDENTSCLASSESCLASS_H
@@ -10,6 +11,7 @@ public:
     string StudentName;
     string UcCode;
     string ClassCode;
+
     static bool strcomp0(string a, string b);
     static bool strcomp1(string a, string b);
     static int ocupacaoTurma(const string cadeira, string turma, const vector<studentsClassesClass>& arr);
@@ -24,7 +26,8 @@ public:
     static bool diferencaDeAlunosTurma(const string cadeira, const vector<studentsClassesClass>& arr);
     static void adicionarEstudante(const string nome, const string cadeira, const string turma, vector<studentsClassesClass>& arr);
     static void removerEstudante(const string nome, const string cadeira, vector<studentsClassesClass>& arr);
-    static void alteraçaoVariasTurmas(vector<studentsClassesClass> &arr);
+    static void alteraçaoVariasTurmas( vector<studentsClassesClass> &arr);
+    static void verificarFinalDoDia(vector<studentsClassesClass> &arr);
 };
 
 

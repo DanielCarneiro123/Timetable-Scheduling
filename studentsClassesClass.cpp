@@ -94,33 +94,33 @@ void studentsClassesClass::pedidoAlteracaoHorario(const std::string nome, const 
     }
 }
 
-void studentsClassesClass::alteraçaoVariasTurmas(vector<studentsClassesClass> &arr){
+queue<studentsClassesClass> fila;
 
-    struct pedido {
-        string Uc;
-        string novaTurma;
-        string nome;
-    };
-    pedido x;
-    vector<pedido> v;
+void studentsClassesClass::alteraçaoVariasTurmas(vector<studentsClassesClass> &arr){
+    studentsClassesClass x;
     bool flag = 1;
     cout << "Qual é o teu nome?" << endl;
-    cin >> x.nome;
+    cin >> x.StudentName;
     while(flag) {
         cout << "Qual é a UC?" << endl;
-        cin >> x.Uc;
+        cin >> x.UcCode;
         cout << "E qual é a nova turma?" << endl;
-        cin >> x.novaTurma;
-        cout << "O seu pedido foi adicionado a fila";
+        cin >> x.ClassCode;
+        cout << "O teu pedido foi adicionado a fila";
         cout << "Queres mudar mais alguma? Carrega '1' para 'Sim' ou '0' para não" << endl;
         cin >> flag;
-        v.push_back(x);
-    }
-    for (auto y : v ){
-        pedidoAlteracaoHorario( y.nome, y.Uc, y.novaTurma, arr);
+        fila.push(x);
     }
 }
-
+void studentsClassesClass:: verificarFinalDoDia(vector<studentsClassesClass> &arr) {
+    if (fila.empty()) cout << "Não houve pedidos de alteração de horário hoje." << endl;
+    else {
+        while (!fila.empty()) {
+            pedidoAlteracaoHorario(fila.front().StudentName, fila.front().UcCode, fila.front().ClassCode, arr);
+            fila.pop();
+        }
+    }
+}
 
 
 
@@ -196,7 +196,7 @@ void studentsClassesClass::todosEstudantes(const vector<studentsClassesClass>& a
             v.insert(x.StudentName);
         }
 
-    }1
+    }
     cout << "All the students that are assigned to at least one UC are: ";
     for (auto x: v){
         cout << sep << " " << x;

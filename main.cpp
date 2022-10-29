@@ -98,23 +98,23 @@ int main() {
     classesClass classe;
 
     myFile.open("../classes.csv");
-    getline(myFile,CurrentLine);
+    getline(myFile, CurrentLine);
     string tempClassString; // string criada para poder copiar ints como classes.StartHour e classe.Duration para uma string
 
-    while(getline(myFile,CurrentLine)) {
+    while (getline(myFile, CurrentLine)) {
         stringstream inputString(CurrentLine);
         getline(inputString, classe.ClassCode, ',');
         getline(inputString, classe.UcCode, ',');
         getline(inputString, classe.Weekday, ',');
 
         getline(inputString, tempClassString, ',');
-        classe.StartHour=atoi(tempClassString.c_str());
+        classe.StartHour = atoi(tempClassString.c_str());
 
-        tempClassString="";
+        tempClassString = "";
         getline(inputString, tempClassString, ',');
-        classe.Duration=atoi(tempClassString.c_str());
+        classe.Duration = atoi(tempClassString.c_str());
 
-        getline(inputString,classe.Type,',');
+        getline(inputString, classe.Type, ',');
         if (classe.Type.back() == '\r') classe.Type.pop_back();
         ArrClasses.push_back(classe);
 
@@ -128,14 +128,14 @@ int main() {
     classesPerUcClass classPerUc;
 
     myFile.open("../classes_per_uc.csv");
-    getline(myFile,CurrentLine);
-    while(getline(myFile,CurrentLine)) {
+    getline(myFile, CurrentLine);
+    while (getline(myFile, CurrentLine)) {
         stringstream inputString(CurrentLine);
         getline(inputString, classPerUc.UcCode, ',');
         getline(inputString, classPerUc.ClassCode, ',');
         if (classe.ClassCode.back() == '\r') classe.ClassCode.pop_back();
         ArrClassesPerUc.push_back(classPerUc);
-        CurrentLine= "";
+        CurrentLine = "";
     }
     myFile.close();
     CurrentLine = "";
@@ -146,9 +146,9 @@ int main() {
     studentsClassesClass studentClasses;
 
     myFile.open("../students_classes.csv");
-    getline(myFile,CurrentLine);
+    getline(myFile, CurrentLine);
 
-    while(getline(myFile,CurrentLine)) {
+    while (getline(myFile, CurrentLine)) {
         stringstream inputString(CurrentLine);
         getline(inputString, studentClasses.StudentCode, ',');
         getline(inputString, studentClasses.StudentName, ',');
@@ -156,8 +156,9 @@ int main() {
         getline(inputString, studentClasses.ClassCode, ',');
         if (classe.ClassCode.back() == '\r') classe.ClassCode.pop_back();
         ArrStudentsClasses.push_back(studentClasses);
-        CurrentLine= "";
+        CurrentLine = "";
     }
+
 
     string stringResposta;
     int intResposta;
@@ -167,10 +168,12 @@ int main() {
         cout << "Actions related to UCs (Occupation of UC,Classes Per UC, All UCs,...) - [PRESS 2]" << endl;
         cout << "Actions related to Classes (Occupation of Class,...) - [PRESS 3]" << endl;
         cout << "Request to Change Schedule - [PRESS 4]" << endl;
+        cout << "If the day has come to an end - [PRESS f]" << endl;
         cout << "If you want to exit the menu - [PRESS q]" << endl;
         cout << "==================================================================================" << endl;
         cin >> stringResposta;
         if (stringResposta == "q") break;
+        if (stringResposta == "f") studentsClassesClass::verificarFinalDoDia(ArrStudentsClasses);
         if (stringResposta == "1"){
             intResposta=0;
             cout << "=================What action do you wish to do?===================" << endl;
@@ -179,11 +182,13 @@ int main() {
             cout << "If you want to see all students belonging to a year [PRESS 3]" << endl;
             cout << "If you want to see all students from an UCs [PRESS 4]" << endl;
             cout << "If you want to see the schedule of a student [PRESS 5]" << endl;
+            cout << "If the day has come to an end - [PRESS f]" << endl;
             cout << "If you want to exit the menu - [PRESS q]" << endl;
             cout << "==================================================================" << endl;
 
             cin >> stringResposta;
             if (stringResposta == "q") break;
+            if (stringResposta == "f") studentsClassesClass::verificarFinalDoDia(ArrStudentsClasses);
             if (stringResposta == "1"){
                 cout << "Which class do you want see? || FORMAT:1LEIC01";
                 cin >> stringResposta;
@@ -209,7 +214,12 @@ int main() {
             cout << "If you want to see which students are in UCs from a certain year [PRESS 1]" << endl;
             cout << "If you want to see all UCs [PRESS 2]" << endl;
             cout << "If you want to see all students belonging to an UC [PRESS 3]" << endl;
+            cout << "If the day has come to an end - [PRESS f]" << endl;
+            cout << "If you want to exit the menu - [PRESS q]" << endl;
             cout << "==========================================================================" << endl;
+            cin >> stringResposta;
+            if (stringResposta == "q") break;
+            if (stringResposta == "f") studentsClassesClass::verificarFinalDoDia(ArrStudentsClasses);
             if (intResposta == 1){
                 cin >> intResposta;
                 studentsClassesClass::ocupacaoUcsAno(ArrStudentsClasses, intResposta);
@@ -232,6 +242,7 @@ int main() {
     }
 
 }
+
 //studentsClassesClass1.turmasUC(ArrStudentsClasses,"L.EIC012");
 //studentsClassesClass1.estudantesTurma(ArrStudentsClasses, "1LEIC05");
 //studentsClassesClass1.ocupacaoTurma("L.EIC002","1LEIC14",ArrStudentsClasses);
@@ -241,6 +252,6 @@ int main() {
 //studentsClassesClass1.ocupacaoUcsAno(ArrStudentsClasses,'1');
 //classesPerUcClass1.todasUcs(ArrClassesPerUc);
 //studentsClassesClass1.todosEstudantes(ArrStudentsClasses);
-//studentsClassesClass::pedidoAlteracaoHorario("Iara","L.EIC002","1LEIC08",ArrStudentsClasses);
+//studentsClassesClass::pedidoAlteracaoHorario("Iara", "L.EIC002", "1LEIC08", ArrStudentsClasses);
 //removerEstudante("Jose Jesualdo", "L.EIC023", "3LEIC08", ArrStudentsClasses);
 //studentsClassesClass::alteraçaoVariasTurmas(ArrStudentsClasses);
